@@ -1,2 +1,2 @@
 # TIFF-ReactApp
-I just started developing a web page using React.js.
+I am developing a web app using React.js.
