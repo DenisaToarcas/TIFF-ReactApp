@@ -10,7 +10,7 @@ export const EditPage = () => {
   const [role, setRole] = useState(null);
 
   const navigate = useNavigate();
-  const { updateRoles, getRoleById } = useTIFFRoleContext();
+  const { updateRoles, getRoleById, deleteTask } = useTIFFRoleContext();
 
   /*useEffect(() => {
     // Call the getRoleById function from roles.js
@@ -54,6 +54,23 @@ export const EditPage = () => {
       console.error("Error updating role:", error);
     }
   };
+
+  const goToEditTaskPage = (id) => {
+    console.log(`Update task with ID: ${id}`);
+    navigate(`/editTask/${id}`); // Navigate to EditTaskPage with the specified task ID
+  };
+
+  const handleDeleteForTask = async (id) => {
+    console.log(`Delete task with ID: ${id}`);
+    try {
+      const response = await deleteTask(id);
+      console.log("Task deleted successfully!");
+      console.log(response);
+    }
+    catch (error) {
+      console.error("Error deleting task:", error);
+    }
+  };
   
   return (
     <div className="min-h-screen bg-gradient-to-r from-cyan-200 to-blue-500">
@@ -77,6 +94,36 @@ export const EditPage = () => {
             <p className="card-text text-lg font-bold mb-1 text-blue-900">Number of volunteers: {role.openRoles}</p>
             <p className="card-text text-lg font-bold mb-1 text-blue-900">Schedule: {role.schedule}</p>
             <p className="card-text text-lg font-bold mb-1 text-blue-900">Expectation: {role.expectation}</p>
+            <p className="card-text text-lg font-bold mb-1 text-blue-900">Tasks:</p>
+            <ul>
+              {role.tasks.map((task, index) => (
+                <div>
+                <li key={index}>
+                  {/* Render task properties */}
+                  <p className="card-text text-lg font-bold mb-1 text-blue-900">{task.id}.</p>
+                  <p className="card-text text-lg font-bold mb-1 text-blue-900">Task Title: {task.title}</p>
+                  <p className="card-text text-lg font-bold mb-1 text-blue-900">Task Description: {task.description}</p>
+                  <p className="card-text text-lg font-bold mb-1 text-blue-900">Task Status: {task.status}</p>
+                  <p className="card-text text-lg font-bold mb-1 text-blue-900">Task Priority: {task.priority}</p>
+                  {/* Add more task properties as needed */}
+                </li>
+                <div className="flex items-center space-x-5">
+                <button
+                    onClick={() => goToEditTaskPage(task.id)}
+                    className="bg-purple-500 hover:bg-purple-700 text-white font-bold py-2 px-4 rounded"
+                >
+                    Update
+                </button>
+                <button
+                    onClick={() => handleDeleteForTask(task.id)}
+                    className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded"
+                >
+                    Delete
+                </button>
+                </div>
+            </div>
+              ))}
+            </ul>
           </div>
         </div>
       ) : (
@@ -85,6 +132,14 @@ export const EditPage = () => {
       {role && (
         <EditableRole role={role} onUpdate={handleUpdate} />
       )}
+      <div className="flex items-center justify-between">
+          <button
+            className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+            onClick={() => {console.log(`Go to add task page for id: ${role.id}`); navigate(`/addTask/${role.id}`)}}
+          >
+            Add New Task
+          </button>
+      </div>
     </div>
   );
 };

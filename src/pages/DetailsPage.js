@@ -66,6 +66,21 @@ export const DetailsPage = () => {
             <p className="card-text text-lg font-bold mb-1 text-blue-900">Number of volunteers: {role.openRoles}</p>
             <p className="card-text text-lg font-bold mb-1 text-blue-900">Schedule: {role.schedule}</p>
             <p className="card-text text-lg font-bold mb-1 text-blue-900">Expectation: {role.expectation}</p>
+            <p className="card-text text-lg font-bold mb-1 text-blue-900">Tasks:</p>
+            <ul>
+              {role.tasks.map((task, index) => (
+                <li key={index}>
+                  {/* Render task properties */}
+                  <p className="card-text text-lg font-bold mb-1 text-blue-900">Task ID: {task.id}</p>
+                  <p className="card-text text-lg font-bold mb-1 text-blue-900">Task Title: {task.title}</p>
+                  <p className="card-text text-lg font-bold mb-1 text-blue-900">Task Description: {task.description}</p>
+                  <p className="card-text text-lg font-bold mb-1 text-blue-900">Task Status: {task.status}</p>
+                  <p className="card-text text-lg font-bold mb-1 text-blue-900">Task Priority: {task.priority}</p>
+                  {/* Add more task properties as needed */}
+                </li>
+              ))}
+            </ul>
+
           </div>
         </div>
       ) : (

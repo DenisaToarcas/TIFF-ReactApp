@@ -16,6 +16,9 @@ import { getRoles, deleteRole } from "./api/roles.js";
 import { getRoleById } from "./api/roles.js";
 import { checkServer } from "./components/checkServer.js";
 import io from "socket.io-client";
+import { AddTaskPage } from "./pages/AddTaskPage.js";
+import { getTasks, getTaskById, addTask, updateTask, deleteTask } from "./api/tasks.js";
+import { EditTaskPage } from "./pages/EditTaskPage.js";
 
 const router = createBrowserRouter([
   {
@@ -37,6 +40,14 @@ const router = createBrowserRouter([
   {
     path: "/ChartPage",
     element: <ChartPage />
+  },
+  {
+    path: "/addTask/:id",
+    element: <AddTaskPage />
+  },
+  {
+    path: "/editTask/:id",
+    element: <EditTaskPage />
   },
   {
     path: "*",
@@ -119,7 +130,27 @@ export default function App() {
       catch (error) {
         console.error("Error fetching role:", error);
       }
-  }
+    },
+    getTasks: async () => {
+      const response = await getTasks();
+      return response;
+    },
+    getTaskById: async (id) => {
+      const response = await getTaskById(id);
+      return response;
+    },
+    addTask: async (roleId, task) => {
+      const response = await addTask(roleId, task);
+      return response;
+    },
+    updateTask: async (id, task) => {
+      const response = await updateTask(id, task);
+      return response;
+    },
+    deleteTask: async (id) => {
+      const response = await deleteTask(id);
+      return response;
+    }
   };
 
   return (
