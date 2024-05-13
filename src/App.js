@@ -22,6 +22,8 @@ import { EditTaskPage } from "./pages/EditTaskPage.js";
 import { Login } from "./pages/Login.js";
 import { SignUp } from "./pages/SignUp.js";
 import { MainPage } from "./pages/MainPage.js";
+import { getUsers, getUserPersonalInfo } from "./api/users.js";
+import { login, signUp } from "./api/loginAndSignUp.js";
 
 const router = createBrowserRouter([
   {
@@ -166,6 +168,22 @@ export default function App() {
     },
     deleteTask: async (id) => {
       const response = await deleteTask(id);
+      return response;
+    },
+    login: async (user) => {
+      const response = await login(user);
+      return response;
+    },
+    signUp: async (user) => {
+      const response = await signUp(user);
+      return response;
+    },
+    getUsers: async () => {
+      const response = await getUsers();
+      return response;
+    },
+    getUserPersonalInfo: async () => {
+      const response = await getUserPersonalInfo();
       return response;
     }
   };

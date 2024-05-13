@@ -1,5 +1,4 @@
 import { createContext, useContext } from "react";
-import { getTaskById, getTasks } from "../api/tasks";
 
 export const TIFFRoleContext = createContext({
   roles: [],
@@ -13,7 +12,11 @@ export const TIFFRoleContext = createContext({
   getTaskById: () => {},
   addTask: () => {},
   updateTask: () => {},
-  deleteTask: () => {}
+  deleteTask: () => {},
+  login: () => {},
+  signUp: () => {},
+  getUsers: () => {},
+  getUserPersonalInfo: () => {}
 });
 
 export const useTIFFRoleContext = () => useContext(TIFFRoleContext);

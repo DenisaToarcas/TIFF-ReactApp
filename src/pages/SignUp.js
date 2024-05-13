@@ -1,31 +1,47 @@
 import React from "react";
 import { useNavigate } from 'react-router-dom';
-
+import { useTIFFRoleContext } from "../store/contextProvider";
 
 export const SignUp = () => {
     const [username, setUsername] = React.useState("");
+    const [address, setAddress] = React.useState("");
+    const [CNP, setCNP] = React.useState("");
     const [email, setEmail] = React.useState("");
     const [password, setPassword] = React.useState("");
 
     const navigate = useNavigate();
 
+    const { signUp } = useTIFFRoleContext();
+
     const handleSignIn = async (e) => {
         e.preventDefault();
 
         const newUser = {
+            id: 0,
             username: username,
+            address: address,
+            CNP: CNP,
             email: email,
             password: password,
         };
 
         console.log("Sign Up button clicked!");
-        console.log("New User:", newUser);
+        try {
+            console.log("Adding user:", newUser);
+            const response = await signUp(newUser);
+            console.log("User added successfully:", response);
+            
+            setUsername("");
+            setAddress("");
+            setCNP("");
+            setEmail("");
+            setPassword("");
 
-        setUsername("");
-        setEmail("");
-        setPassword("");
-
-        navigate("/login");
+            navigate("/login");
+        }
+        catch (error) {
+            console.error("Error adding user:", error);
+        }
     }
 
 
@@ -44,6 +60,28 @@ export const SignUp = () => {
                                 id="username"
                                 type="text"
                                 placeholder="Username"
+                            />
+                        </div>
+                        <div className="mb-4">
+                            <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="address">
+                                Address
+                            </label>
+                            <input
+                                className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                                id="address"
+                                type="text"
+                                placeholder="Address"
+                            />
+                        </div>
+                        <div className="mb-4">
+                            <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="CNP">
+                                CNP
+                            </label>
+                            <input
+                                className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                                id="CNP"
+                                type="text"
+                                placeholder="CNP"
                             />
                         </div>
                         <div className="mb-4">
