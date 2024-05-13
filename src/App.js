@@ -23,7 +23,7 @@ import { Login } from "./pages/Login.js";
 import { SignUp } from "./pages/SignUp.js";
 import { MainPage } from "./pages/MainPage.js";
 import { getUsers, getUserPersonalInfo } from "./api/users.js";
-import { login, signUp } from "./api/loginAndSignUp.js";
+import { login, signUp, getTokenFromUser, setUser, setToken } from "./api/loginAndSignUp.js";
 
 const router = createBrowserRouter([
   {
@@ -185,6 +185,17 @@ export default function App() {
     getUserPersonalInfo: async () => {
       const response = await getUserPersonalInfo();
       return response;
+    },
+    getTokenFromUser: (user) => {
+      const response = getTokenFromUser(user);
+      return response;
+    },
+    setUser: (user) => {
+      const response = setUser(user);
+      return response;
+    },
+    setToken: (token) => {
+      setToken(token);
     }
   };
 

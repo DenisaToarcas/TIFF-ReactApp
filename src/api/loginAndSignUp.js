@@ -12,4 +12,18 @@ async function signUp(user) {
   return response.data;
 }
 
-export { login, signUp };
+function getTokenFromUser(user) {
+  return user.token;
+}
+
+function setUser(user) {
+  localStorage.setItem("user", JSON.stringify(user));
+}
+
+function setToken(token) {
+  localStorage.setItem("token", token);
+  console.log("Token set in local storage");
+  console.log(localStorage.getItem("token"));
+}
+
+export { login, signUp, getTokenFromUser, setUser, setToken };

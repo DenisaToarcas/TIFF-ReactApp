@@ -1,11 +1,14 @@
 import React from "react";
 import { useTIFFRoleContext } from "../store/contextProvider";
+import { useNavigate } from "react-router-dom";
 
 export const Login = () => {
     const [email, setEmail] = React.useState("");
     const [password, setPassword] = React.useState("");
 
-    const { login } = useTIFFRoleContext();
+    const { login, setToken } = useTIFFRoleContext();
+
+    const navigate = useNavigate();
 
     const handleLogin = async (e) => {
         e.preventDefault();
@@ -19,10 +22,12 @@ export const Login = () => {
         try {
             console.log("Authenticating user:", user);
             const response = await login(user);
-            console.log("User added successfully:", response);
+            console.log("User login successfully:", response);
+            setToken(response.token);
             
             setEmail("");
             setPassword("");
+            navigate("/master");
         }
         catch (error) {
             console.error("Error adding user:", error);
@@ -36,13 +41,15 @@ export const Login = () => {
             <form className="mb-4" onSubmit={handleLogin}>
                 <div className="mb-4">
                 <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="username">
-                    Username
+                    Email
                 </label>
                 <input
                     className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                    id="username"
+                    id="email"
                     type="text"
-                    placeholder="Username"
+                    placeholder="Email"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
                 />
                 </div>
                 <div className="mb-6">
@@ -54,6 +61,8 @@ export const Login = () => {
                     id="password"
                     type="password"
                     placeholder="******************"
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
                 />
                 <div className="flex items-center justify-between">
                             <button

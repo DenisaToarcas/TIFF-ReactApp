@@ -30,7 +30,7 @@ export const MainPage = () => {
                             type="button"
                             onClick={handleSignup}
                         >
-                            Signup
+                            Sign Up
                         </button>
                     </div>
                 </div>

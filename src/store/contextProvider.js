@@ -16,7 +16,10 @@ export const TIFFRoleContext = createContext({
   login: () => {},
   signUp: () => {},
   getUsers: () => {},
-  getUserPersonalInfo: () => {}
+  getUserPersonalInfo: () => {},
+  getTokenFromUser: () => {},
+  setUser: () => {},
+  setToken: () => {}
 });
 
 export const useTIFFRoleContext = () => useContext(TIFFRoleContext);

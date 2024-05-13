@@ -49,7 +49,7 @@ export const SignUp = () => {
         <div className="min-h-screen bg-gradient-to-r from-cyan-200 to-blue-500">
             <div className="max-w-lg mx-auto">
                 <div className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
-                    <h1 className="text-2xl font-bold text-center text-gray-800 mb-4">Register</h1>
+                    <h1 className="text-2xl font-bold text-center text-gray-800 mb-4">Sign Up</h1>
                     <form className="mb-4" onSubmit={handleSignIn}>
                         <div className="mb-4">
                             <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="username">
@@ -60,6 +60,8 @@ export const SignUp = () => {
                                 id="username"
                                 type="text"
                                 placeholder="Username"
+                                value={username}
+                                onChange={(e) => setUsername(e.target.value)}
                             />
                         </div>
                         <div className="mb-4">
@@ -71,6 +73,8 @@ export const SignUp = () => {
                                 id="address"
                                 type="text"
                                 placeholder="Address"
+                                value={address}
+            on                  onChange={(e) => setAddress(e.target.value)}
                             />
                         </div>
                         <div className="mb-4">
@@ -82,6 +86,8 @@ export const SignUp = () => {
                                 id="CNP"
                                 type="text"
                                 placeholder="CNP"
+                                value={CNP}
+                                onChange={(e) => setCNP(e.target.value)}
                             />
                         </div>
                         <div className="mb-4">
@@ -93,6 +99,8 @@ export const SignUp = () => {
                                 id="email"
                                 type="text"
                                 placeholder="Email"
+                                value={email}
+                                onChange={(e) => setEmail(e.target.value)}
                             />
                         </div>
                         <div className="mb-6">
@@ -104,6 +112,8 @@ export const SignUp = () => {
                                 id="password"
                                 type="password"
                                 placeholder="******************"
+                                value={password}
+                                onChange={(e) => setPassword(e.target.value)}
                             />
                         </div>
                         <div className="flex items-center justify-between">
