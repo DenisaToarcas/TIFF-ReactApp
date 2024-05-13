@@ -62,7 +62,7 @@ export const ChartPage = () => {
 
     const handleClick = () => {
         console.log("Go back to HomePage!");
-        navigate("/"); // Navigate to HomePage
+        navigate("/master"); // Navigate to HomePage
       };
     
 

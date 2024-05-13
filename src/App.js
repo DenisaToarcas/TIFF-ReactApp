@@ -14,16 +14,31 @@ import { ChartPage } from "./pages/ChartPage.js";
 import { createRole, updateRole } from "./api/roles.js";
 import { getRoles, deleteRole } from "./api/roles.js";
 import { getRoleById } from "./api/roles.js";
-import { checkServer } from "./components/checkServer.js";
+//import { checkServer } from "./components/checkServer.js";
 import io from "socket.io-client";
 import { AddTaskPage } from "./pages/AddTaskPage.js";
 import { getTasks, getTaskById, addTask, updateTask, deleteTask } from "./api/tasks.js";
 import { EditTaskPage } from "./pages/EditTaskPage.js";
+import { Login } from "./pages/Login.js";
+import { SignUp } from "./pages/SignUp.js";
+import { MainPage } from "./pages/MainPage.js";
 
 const router = createBrowserRouter([
   {
     path: "/",
+    element: <MainPage />
+  },
+  {
+    path: "/master",
     element: <MasterPage />
+  },
+  {
+    path: "/login",
+    element: <Login />
+  },
+  {
+    path: "/signup",
+    element: <SignUp />
   },
   {
     path: "/details/:id",
@@ -56,25 +71,25 @@ const router = createBrowserRouter([
 ]);
 
 export default function App() {
-  const [server, setServer] = React.useState(true);
+  //const [server, setServer] = React.useState(true);
   const [roles, setRoles] = React.useState([]);
 
-  async function fetchRoles(){
-    const response = await getRoles();
-    setRoles(response);
-  }
+  // async function fetchRoles(){
+  //   const response = await getRoles();
+  //   setRoles(response);
+  // }
 
-  useEffect(() => {
-    checkServer().then(() => {
-      console.log("Server is running");
-      setServer(true);
-      fetchRoles();
-    }).catch(() => {
-      console.log("Server is not running");
-      setServer(false);
-    }
-    );
-  }, []);
+  // useEffect(() => {
+  //   checkServer().then(() => {
+  //     console.log("Server is running");
+  //     setServer(true);
+  //     fetchRoles();
+  //   }).catch(() => {
+  //     console.log("Server is not running");
+  //     setServer(false);
+  //   }
+  //   );
+  // }, []);
 
   useEffect(() => {
     const socket = io("http://localhost:9090");
@@ -93,10 +108,10 @@ export default function App() {
     }
   }, [setRoles, roles]);
 
-  // Server status check for conditional rendering
-  if (!server) {
-    return <h1>Server is down, please wait...</h1>;
-  }
+  // // Server status check for conditional rendering
+  // if (!server) {
+  //   return <h1>Server is down, please wait...</h1>;
+  // }
 
   const context = {
     roles,
@@ -114,7 +129,9 @@ export default function App() {
       setRoles(roles.map((role) => (role.id === newRoleUpdated.id ? newRoleUpdated : role)));
       return newRoleUpdated;
     },
-    getAllRoles: () => {
+    getAllRoles: async () => {
+      const allRoles = await getRoles();
+      setRoles(allRoles);
       return roles;
     },
     filterRoles: async () => {
