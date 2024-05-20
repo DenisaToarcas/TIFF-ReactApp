@@ -6,7 +6,7 @@ export const Login = () => {
     const [email, setEmail] = React.useState("");
     const [password, setPassword] = React.useState("");
 
-    const { login, setToken } = useTIFFRoleContext();
+    const { login, setToken, setUserId } = useTIFFRoleContext();
 
     const navigate = useNavigate();
 
@@ -24,6 +24,7 @@ export const Login = () => {
             const response = await login(user);
             console.log("User login successfully:", response);
             setToken(response.token);
+            setUserId(response.user_id);
             
             setEmail("");
             setPassword("");

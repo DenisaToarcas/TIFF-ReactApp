@@ -8,6 +8,7 @@ export const TIFFRoleContext = createContext({
   getAllRoles: () => {},
   filterRoles: () => {},
   getRoleById: () => {},
+  getRolesFromUser: () => {},
   getTasks: () => {},
   getTaskById: () => {},
   addTask: () => {},
@@ -19,7 +20,8 @@ export const TIFFRoleContext = createContext({
   getUserPersonalInfo: () => {},
   getTokenFromUser: () => {},
   setUser: () => {},
-  setToken: () => {}
+  setToken: () => {},
+  setUserId: () => {}
 });
 
 export const useTIFFRoleContext = () => useContext(TIFFRoleContext);

@@ -13,7 +13,7 @@ import { AddPage } from "./pages/AddPage.js";
 import { ChartPage } from "./pages/ChartPage.js";
 import { createRole, updateRole } from "./api/roles.js";
 import { getRoles, deleteRole } from "./api/roles.js";
-import { getRoleById } from "./api/roles.js";
+import { getRoleById, getRolesFromUser } from "./api/roles.js";
 //import { checkServer } from "./components/checkServer.js";
 import io from "socket.io-client";
 import { AddTaskPage } from "./pages/AddTaskPage.js";
@@ -23,7 +23,7 @@ import { Login } from "./pages/Login.js";
 import { SignUp } from "./pages/SignUp.js";
 import { MainPage } from "./pages/MainPage.js";
 import { getUsers, getUserPersonalInfo } from "./api/users.js";
-import { login, signUp, getTokenFromUser, setUser, setToken } from "./api/loginAndSignUp.js";
+import { login, signUp, getTokenFromUser, setUser, setToken, setUserId } from "./api/loginAndSignUp.js";
 
 const router = createBrowserRouter([
   {
@@ -117,8 +117,8 @@ export default function App() {
 
   const context = {
     roles,
-    addRoles: async (role) => {
-      const newRoles = await createRole(role);
+    addRoles: async (user_id, role) => {
+      const newRoles = await createRole(user_id, role);
       setRoles([...roles, newRoles]);
     },
     removeRoles: async (id) => {
@@ -149,6 +149,12 @@ export default function App() {
       catch (error) {
         console.error("Error fetching role:", error);
       }
+    },
+    getRolesFromUser: async (userId) => {
+      const response = await getRolesFromUser(userId);
+      console.log("The roles from user are:", response);
+      setRoles(response);
+      return response;
     },
     getTasks: async () => {
       const response = await getTasks();
@@ -196,6 +202,9 @@ export default function App() {
     },
     setToken: (token) => {
       setToken(token);
+    },
+    setUserId: (id) => {
+      setUserId(id);
     }
   };
 

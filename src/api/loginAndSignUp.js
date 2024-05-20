@@ -26,4 +26,10 @@ function setToken(token) {
   console.log(localStorage.getItem("token"));
 }
 
-export { login, signUp, getTokenFromUser, setUser, setToken };
+function setUserId(id) {
+  localStorage.setItem("user_id", id);
+  console.log("User ID set in local storage");
+  console.log(localStorage.getItem("user_id"));
+}
+
+export { login, signUp, getTokenFromUser, setUser, setToken, setUserId };

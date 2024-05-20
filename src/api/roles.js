@@ -13,6 +13,7 @@ axiosInstance.interceptors.request.use(
     const authToken = token;
     if (authToken) {
       config.headers.Authorization = `Bearer ${authToken}`;
+      console.log(config);
     }
     return config;
   },
@@ -31,8 +32,13 @@ async function getRoleById(id) {
   return response.data;
 }
 
-async function createRole(role) {
-  const response = await axiosInstance.post(BASE_URL, role, {method: "POST", data: role});
+async function getRolesFromUser(userId) {
+  const response = await axiosInstance.get(`${BASE_URL}/user_id=${userId}`, {method: "GET"});
+  return response.data;
+}
+
+async function createRole(user_id, role) {
+  const response = await axiosInstance.post(`${BASE_URL}/${user_id}`, role, {method: "POST", data: role});
   return response.data;
 }
 
@@ -46,4 +52,4 @@ async function deleteRole(id) {
   return response.data;
 }
 
-export { getRoles, getRoleById, createRole, updateRole, deleteRole };
+export { getRoles, getRoleById, createRole, updateRole, deleteRole, getRolesFromUser };

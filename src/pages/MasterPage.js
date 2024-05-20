@@ -1,15 +1,16 @@
-//import React, { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from 'react-router-dom';
 import { PaginationHandler } from "./PaginationHandler.js";
 import tiffSVG from "../transilvania-international-film-festival-tiff-logo-vector.svg";
 //import { getRoles, deleteRole } from "../api/roles";
 import { useTIFFRoleContext } from "../store/contextProvider";
+//import { useEffect } from 'react';
 
 export const MasterPage = () => {
-  //const [data, setData] = useState([]);
+  const [data, setData] = useState([]);
   const navigate = useNavigate();
 
-  const { roles, removeRoles, filterRoles } = useTIFFRoleContext();
+  const { removeRoles, filterRoles, getRolesFromUser } = useTIFFRoleContext();
 
   /*useEffect(() => {
     const fetchRoles = async () => {
@@ -26,6 +27,23 @@ export const MasterPage = () => {
     
   }, []);
   */
+
+  useEffect(() => {
+    const fetchRoles = async () => {
+      try {
+        const user_id = localStorage.getItem("user_id");
+        const response = await getRolesFromUser(user_id);
+        console.log("Roles from user fetched successfully:", response);
+        setData(response);
+      }
+      catch (error) {
+        console.error("Error fetching roles from user:", error);
+      }
+    }
+    fetchRoles();
+  }
+  , [getRolesFromUser]);
+
 
   const handleDelete = async (id) => {
     console.log(`Delete role with ID: ${id}`);
@@ -76,7 +94,7 @@ export const MasterPage = () => {
           Home<br />Page
         </span>
       </h1>
-      <PaginationHandler data = {roles} onDelete={handleDelete}/>
+      <PaginationHandler data = {data} onDelete={handleDelete}/>
       <div className="flex space-x-4">
       <button
         className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-10 rounded"
