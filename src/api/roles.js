@@ -1,6 +1,7 @@
 import axios from 'axios';
 
-const BASE_URL = 'http://localhost:8080/api/roles';
+//const BASE_URL = 'http://localhost:8080/api/roles';
+const BASE_URL = 'https://backend.mangowave-ab0a2a4b.northeurope.azurecontainerapps.io/api/roles';
 
 const axiosInstance = axios.create({
   baseURL: BASE_URL

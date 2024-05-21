@@ -1,6 +1,7 @@
 import axios from "axios";
 
-const BASE_URL = "http://localhost:8080/api/authentication";
+//const BASE_URL = "http://localhost:8080/api/authentication";
+const BASE_URL = "https://backend.mangowave-ab0a2a4b.northeurope.azurecontainerapps.io/api/authentication";
 
 async function login(user) {
   const response = await axios.post(`${BASE_URL}/login`, user);
