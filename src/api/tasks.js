@@ -1,7 +1,8 @@
 import axios from 'axios';
 
 //const BASE_URL = 'http://localhost:8080/api/tasks';
-const BASE_URL = 'https://backend.mangowave-ab0a2a4b.northeurope.azurecontainerapps.io/api/tasks';
+const BASE_URL = 'http://localhost:8443/api/tasks';
+//const BASE_URL = 'https://backend.mangowave-ab0a2a4b.northeurope.azurecontainerapps.io/api/tasks';
 
 const axiosInstance = axios.create({
   baseURL: BASE_URL
